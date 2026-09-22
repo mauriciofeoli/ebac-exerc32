@@ -1,0 +1,22 @@
+// Contagem dos resultados
+
+db.books.countDocuments({
+  status: { $ne: "PUBLISH" },
+  pageCount: { $lt: 300 }
+})
+
+db.books.countDocuments({
+  $and: [
+    { title: { $regex: "MongoDB", $options: "i" } },
+    { title: { $regex: "SQL Server", $options: "i" } }
+  ]
+})
+
+db.books.countDocuments({ isbn: { $regex: /^18/ } })
+
+db.books.countDocuments({
+  $or: [
+    { longDescription: { $regex: "JAVA", $options: "i" } },
+    { longDescription: { $regex: "Mobile", $options: "i" } }
+  ]
+})

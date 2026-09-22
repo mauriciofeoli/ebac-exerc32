@@ -1,0 +1,33 @@
+// 1. Livros nao publicados com menos de 300 paginas
+db.books.find(
+  { status: { $ne: "PUBLISH" }, pageCount: { $lt: 300 } },
+  { _id: 0, title: 1, status: 1, pageCount: 1 }
+)
+
+// 2. Titulos com MongoDB e SQL Server
+db.books.find(
+  {
+    $and: [
+      { title: { $regex: "MongoDB", $options: "i" } },
+      { title: { $regex: "SQL Server", $options: "i" } }
+    ]
+  },
+  { _id: 0, title: 1 }
+)
+
+// 3. ISBN que comeca com 18
+db.books.find(
+  { isbn: { $regex: /^18/ } },
+  { _id: 0, title: 1, isbn: 1 }
+)
+
+// 4. Descricao com JAVA ou Mobile
+db.books.find(
+  {
+    $or: [
+      { longDescription: { $regex: "JAVA", $options: "i" } },
+      { longDescription: { $regex: "Mobile", $options: "i" } }
+    ]
+  },
+  { _id: 0, title: 1, longDescription: 1 }
+)
